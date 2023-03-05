@@ -28,6 +28,7 @@ async function adjustForOCR(buffImg, avgBrightness) {
     return new Promise(resolve => {
         const adjustedImage = Jimp.read(buffImg)
         .then((img) => {
+            //img.contrast(1).autocrop([1, true]).write("CROPPED.jpg")
             if (avgBrightness < 70) {
                 return img
                 .scale(4) // upscale
@@ -37,10 +38,13 @@ async function adjustForOCR(buffImg, avgBrightness) {
                 .getBufferAsync(Jimp.AUTO) //save as a buffer
             } else {
                 return img
+                //.resize(4000, Jimp.AUTO) // upscale
                 .scale(4) // upscale
                 .quality(100) // set JPEG quality
                 .greyscale()  // set greyscale
+                .contrast(0.2)// boost contrast
                 //.normalize()
+                //.write("GAGAGAGAGA.jpg")
                 .getBufferAsync(Jimp.AUTO) //save as a buffer
             }
         })

@@ -71,6 +71,7 @@ app.post('/upload', (req, res) => {
     console.log("Image received")
     const imgBrightness = req.body.avgBrightness
     const requestId = req.body.id
+    const fileName = req.body.fileName
     let base64Data = req.body.base64img.split("base64,")[1];
 
     //let imgExtId = base64Data.charAt(0)
@@ -93,10 +94,11 @@ app.post('/upload', (req, res) => {
             console.log("=======")
             res.json({
                 text: ocrOut.paragraphs,
-                id: requestId
+                id: requestId,
+                fileName
             })
         })
     })
 })
 
-app.listen(3001)
+app.listen(3000)
